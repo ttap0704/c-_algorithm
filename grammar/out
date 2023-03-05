@@ -1,0 +1,1 @@
+g++ -std=c++14 -Wall 20230305_j.cpp -o test.out
