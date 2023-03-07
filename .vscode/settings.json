@@ -2,7 +2,8 @@
   "files.associations": {
     "iostream": "cpp",
     "__bit_reference": "cpp",
-    "vector": "cpp"
+    "vector": "cpp",
+    "regex": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
