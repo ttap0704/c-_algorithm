@@ -3,7 +3,8 @@
     "iostream": "cpp",
     "__bit_reference": "cpp",
     "vector": "cpp",
-    "regex": "cpp"
+    "regex": "cpp",
+    "random": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
