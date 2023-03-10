@@ -23,7 +23,7 @@ bool cmp(int a, int b) {
 
 
 int main () {
-  int a[3] = {3, 1, 2};
+  int a[3] = {1, 2, 3};
   vector<int> v;
   for (int i = 0; i < 3; i++) v.push_back(a[i]);
 
@@ -33,6 +33,11 @@ int main () {
   } while (next_permutation(v.begin(), v.end()));
   cout << "--------------" << "\n";
   v.clear();
+
+  do {
+    for(int i : a) cout << i << " ";
+    cout << "\n";
+  } while (next_permutation(&a[0], &a[3]));
 
   for (int i = 2; i >= 0; i--) v.push_back(a[i]);
 
