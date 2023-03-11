@@ -10,5 +10,6 @@ int main () {
   cout << c + 1 << "\n";
   cout << &a[1] << "\n";
 
+  cout << &c[1] << "\n";
   return 0;
 }
