@@ -5,7 +5,8 @@
     "vector": "cpp",
     "regex": "cpp",
     "random": "cpp",
-    "iosfwd": "cpp"
+    "iosfwd": "cpp",
+    "ios": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
