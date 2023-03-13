@@ -6,7 +6,13 @@
     "regex": "cpp",
     "random": "cpp",
     "iosfwd": "cpp",
-    "ios": "cpp"
+    "ios": "cpp",
+    "string": "cpp",
+    "filesystem": "cpp",
+    "stdexcept": "cpp",
+    "__locale": "cpp",
+    "__string": "cpp",
+    "string_view": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }

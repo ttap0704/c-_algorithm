@@ -13,6 +13,7 @@ vector<string> split(string input, string delimiter) {
     input.erase(0, pos + delimiter.length());
   }
 
+
   ret.push_back(input);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 
   return ret;
