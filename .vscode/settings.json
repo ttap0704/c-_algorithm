@@ -33,7 +33,8 @@
     "array": "cpp",
     "functional": "cpp",
     "utility": "cpp",
-    "variant": "cpp"
+    "variant": "cpp",
+    "queue": "cpp"
   },
   "C_Cpp.errorSquiggles": "Disabled"
 }
