@@ -1,18 +1,17 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-bool a[10][10];
+bool a[10][10], visited[10];
 
-void go (int i) {
-  if (i > 10) return;
-
-  for (int j = 0; j < 10; j++) {
-    if (a[i][j] == 1) {
-      cout << "i/j : " << i << "/" << j << "\n";
+void go (int from) {
+  visited[from] = 1;
+  cout << from << "\n";
+  for (int i = 0; i < 10; i++) {
+    if(visited[i]) continue;
+    if(a[from][i]) {
+      go(i);
     }
-  } 
-
-  go(i + 1);
+  }
 }
 
 int main () {
@@ -23,7 +22,14 @@ int main () {
   a[3][4] = 1;
   a[4][3] = 1;
 
-  go(0);
+  for (int i = 0; i < 10; i++) {
+    for (int j = 0; j < 10; j++) {
+      if (a[i][j] && visited[i] == 0) {
+        go(i);
+      }
+    }
+  }
+
   
   return 0;
 }
