@@ -1,35 +1,46 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 using namespace std;
+#define prev test2
+int n, o, A, B, asum, bsum;
+string s, prev; 
 
-typedef long long ll;
-int N, full_time = 48 * 60, a[3], te2, score[3];
-ll te, ti, prev_te;
-string team, cur_time;
+string changeTime(int i) {
+  string m = "00" + to_string(i / 60);
+  string s = "00" + to_string(i % 60);
+  return m.substr(m.size() - 2, 2) + ":" + s.substr(s.size() - 2, 2); 
+}
+
+int changeInt(string s) {
+  return (stoi(s.substr(0, 2)) * 60) + stoi(s.substr(3));
+}
+
+void sumTime(int &sum, string s) {
+  sum += changeInt(s) - changeInt(prev);
+}
 
 int main () {
   ios_base::sync_with_stdio(false);
   cin.tie(NULL);
   cout.tie(NULL);
 
-  cin >> N;
-  for (int i = 0; i < N; i++) {
-    cin >> team >> cur_time;
-    te = stoi(team);
-    te2 = te == 1 ? 2 : 1;
-    ti = (stoi(cur_time.substr(0, 2)) * 60) + stoi(cur_time.substr(3));
-    score[te]++;
-    if (score[te] > score[te2]) {
-      a[te] = full_time - ti;
-      if (i != 0) {
-        a[te2] -= a[te];
-      }
-    }
+  cin >> n;
 
-    prev_te = te;
+  for (int i = 0; i < n; i++) {
+    cin >> o >> s;
+
+    if (A > B) sumTime(asum, s);
+    else if (B > A) sumTime(bsum, s);
+    
+    if (o == 1) A++;
+    else B++;
+    prev = s;
   }
 
-  cout << "a[1] :: "<< a[1] / 60 << ":" << a[1] % 60 << "\n";
-  cout << "a[2] :: "<< a[2] / 60 << ":" << a[2] % 60 << "\n";
+  if (A > B) sumTime(asum, "48:00");
+  else if (B > A) sumTime(bsum, "48:00");
+
+  cout << changeTime(asum) << "\n";
+  cout << changeTime(bsum) << "\n";
 
   return 0;
 }
