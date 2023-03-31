@@ -15,13 +15,14 @@ int main () {
   while (true) {
     getline(cin, s);
 
+    if (s == ".") break;
+
     if (s[s.size() - 1] != '.') {
       cout << "no\n";
       continue;
     } else {
       stack<char> st;
       s.erase(s.size() - 1, 1);
-      cout << s << "\n";
       for (char c : s) {
         if (c == '(' || c == ')' || c == '[' || c == ']') {
           if (st.size()) {
