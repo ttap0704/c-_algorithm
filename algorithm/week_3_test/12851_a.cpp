@@ -6,32 +6,28 @@ int N, K, a[200004], visited[200004], cnt[200004], mn = INF;
 vector<int> ny_arr;
 
 void bfs(int y) {
-  queue<int> q;
-  q.push(y);
   visited[y] = 1;
   cnt[y] = 1;
+  queue<int> q;
+  q.push(y);
 
   while (q.size()) {
     tie(y) = q.front();
     q.pop();
 
     for (int i = 0; i < 3; i++) {
-      int ny;
-      if (i == 0) {
-        ny = y - 1;
-      } else if (i == 1) {
-        ny = y + 1;
-      } else {
-        ny = y * 2;
-      }
+      int ny = 0;
+      if (i == 0) ny = y + 1;
+      else if (i == 1) ny = y - 1;
+      else if (i == 2) ny = y * 2;
 
-      if (ny < 0 || ny > 200001) continue;
-      if (visited[ny] == visited[y] + 1) {
-        cnt[ny] += cnt[y];
-      } else if (!visited[ny]) {
-        cnt[ny] += cnt[y];
+      if (ny < 0 || ny > 200000) continue;
+      if (visited[ny] == 0) {
         visited[ny] = visited[y] + 1;
         q.push(ny);
+        cnt[ny] += cnt[y];
+      } else if (visited[ny] == visited[y] + 1) {
+        cnt[ny] += cnt[y];
       }
     }
   }
