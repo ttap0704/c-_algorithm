@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-int a, b, v, sum = 0, i = 1;
+int a, b, v, sum = 0, ret = 1;
 
 int main () {
   ios_base::sync_with_stdio(false);
@@ -10,17 +10,14 @@ int main () {
 
   cin >> a >> b >> v;
 
-  // while (true) {
-  //   sum += a;
-  //   if (sum >= v) break;
-  //   sum -= b;
-  //   i++;
-  // }
+  if (a >= v) cout << '1' << '\n';
+  else {
+    ret += (v - a) / (a - b);
+    if ((v - a) % (a - b) != 0) ret++;
 
-  // v / (a - b);
-
-  // cout << i << '\n';
-  cout << ((v / a) + 1) << '\n';
+    cout << ret << '\n';
+  }  
+  
 
   return 0;
 }
