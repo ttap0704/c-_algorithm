@@ -1,19 +1,20 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int INF = -1e9;
-int N, M, C, dp[13][12][22], a[13], visited[22], ret;
+int N, M, C, a[24], dp[24][1 << 14][24];
 
-int go (int idx, int back, int weight) {
-  if (weight > C) return INF;
-  if (idx == N) return 0;
-
-  int &ret = dp[idx][back][weight];
+int go (int here, int visited, int weight) {
+  if (here == M) return 0;
+  
+  int &ret = dp[here][visited][weight];
   if (ret) return ret;
+  ret = max(ret, go(here + 1, visited, C));
 
   for (int i = 0; i < N; i++) {
-    if (visited[i]) continue;
-    ret = max(ret, go(idx + 1, back, weight + a[i]) + 1);
+    bool check1 = (1 << i) & visited;
+    bool check2 = (weight - a[i])>= 0;
+    
+    if (!check1 && check2) ret = max(ret, go(here, visited | (1 << i), weight - a[i]) + 1);
   }
 
   return ret;
@@ -27,18 +28,7 @@ int main () {
   cin >> N >> M >> C;
   for (int i = 0; i < N; i++) cin >> a[i];
 
-  for (int i = 0; i < M; i++) {
-    int mx = go(0, i, 0);
-    
-    cout << mx << "\n";
-    for (int j = ret; j < ret + mx; j++) {
-      cout << i << " : " << j << '\n';
-      visited[j] = 1;
-    }
-    ret += mx;
-  }
-  
-  cout << ret << '\n';
+  cout << go(0, 0, C) << '\n';
 
   return 0;
 }
