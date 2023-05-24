@@ -2,7 +2,7 @@
 #define MAX_N 1004
 using namespace std;
 
-int N, n, lis[MAX_N], len;
+int N, n, a[MAX_N], dp[MAX_N], r_dp[MAX_N], ret;
 
 int main () {
   ios_base::sync_with_stdio(false);
@@ -10,18 +10,25 @@ int main () {
   cout.tie(NULL);
 
   cin >> N;
+  for (int i = 0; i < N; i++) cin >> a[i];
+
   for (int i = 0; i < N; i++) {
-    cin >> n;
-
-    auto *lo_pos = lower_bound(lis, lis + len, n);
-    if (*lo_pos == 0) len++;
-    *lo_pos = n;
-
-    for (int j = 0; j < N; j++) {
-      cout << lis[j] << ' ';
+    dp[i] = 1;
+    for (int j = 0; j <= i; j++) {
+      if (a[i] > a[j] && dp[i] < dp[j] + 1) dp[i] = dp[j] + 1;
     }
-    cout << '\n';
   }
+
+  for (int i = N - 1; i >= 0; i--) {
+    r_dp[i] = 1;
+    for (int j = N - 1; j >= i; j--) {
+      if (a[i] > a[j] && r_dp[i] < r_dp[j] + 1) r_dp[i] = r_dp[j] + 1;
+    }
+  }
+
+  for (int i = 0; i < N; i++) ret = max(dp[i] + r_dp[i] - 1, ret);
+
+  cout << ret << '\n';
 
   return 0;
 }
