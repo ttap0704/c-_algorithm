@@ -1,8 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+typedef long long ll;
 const int INF = 1e9;
-int N, M, a, b, c, dist[1004];
+ll N, M, a, b, c, dist[1004];
 vector<pair<int, int>> adj[1004];
 
 int main () {
@@ -11,7 +12,7 @@ int main () {
   cout.tie(NULL);
 
   cin >> N >> M;
-  fill(dist, dist + N + 1, INF);
+  fill(dist, dist + 1004, INF);
   for (int i = 0; i < M; i++) {
     cin >> a >> b >> c;
     adj[a - 1].push_back({b - 1, c});
