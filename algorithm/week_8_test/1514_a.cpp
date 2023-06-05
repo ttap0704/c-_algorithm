@@ -2,28 +2,29 @@
 using namespace std;
 
 const int INF = 1e9;
-int N, a[104], dp[104];
-string n1, n2;
+int N, dp[104][10][10][10][2], a[104], b[104];
+char c;
 
-int go (int here, int before, int b[104]) {
-  if (here == N) {
-    return 0;
+int changeNumber(int x){
+    return (x < 0) ? x + 10 : x % 10; 
+}
+
+int go (int here, int x, int y, int z, int flag) {
+  if (here >= N) return 0;
+
+  int &ret = dp[here][x][y][z][flag];
+  if (ret != -1) return ret;
+
+  if (changeNumber(x + a[here]) == changeNumber(b[here])) {
+    return ret = min(go(here + 1, y, z, 0, 0), go(here + 1, y, z, 0, 1));
   }
 
-  int &ret = dp[here];
-  if (ret != INF) return ret;
-
-  if (a[here] + before == 0) ret = min(ret, go(here + 1, before, b));
-  else {
-    int minus = -1;
-    if (a[here] + before < 0) {
-      minus = 1;
-    }
-
-    int tmp = abs(a[here] + before);
-
-    int c[104];
-    memcpy(c, b, sizeof(c));
+  ret = INF;
+  int _flag = flag ? 1 : -1;
+  for (int i = 1; i <= 3; i++) {
+    ret = min(ret, 1 + go(here, changeNumber(x + i * _flag), y, z, flag));
+    ret = min(ret, 1 + go(here, changeNumber(x + i * _flag), changeNumber(y + i * _flag), z, flag));
+    ret = min(ret, 1 + go(here, changeNumber(x + i * _flag), changeNumber(y + i * _flag), changeNumber(z + i * _flag), flag));
   }
 
   return ret;
@@ -35,15 +36,12 @@ int main () {
   cout.tie(NULL);
 
   cin >> N;
-  cin >> n1 >> n2;
+  for (int i = 0; i < N; i++) cin >> c, a[i] = (c - '0');
+  for (int i = 0; i < N; i++) cin >> c, b[i] = (c - '0');
   
-  for (int i = 0; i < N; i++) {
-    a[i] = n1[i] - n2[i];
-  }
 
-  fill(dp, dp + 104, INF);
-  for (int i = 0; i < N; i++) cout << a[i] << ' ';
-  cout << '\n';
+  memset(dp, -1, sizeof(dp));
+  cout << min(go(0, 0, 0, 0, 0), go(0, 0, 0, 0, 1)) << '\n';
 
   return 0;
 }
